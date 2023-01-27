@@ -1,0 +1,14 @@
+/* Dark table style */
+.table-dark {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+  .table-dark thead th {
+    border-bottom: 2px solid #454d55;
+  }
+  .table-dark tbody tr:nth-of-type(odd) {
+    background-color: #454d55;
+  }
+  .table-dark tbody tr:hover {
+    background-color: #5f6c73;
+  }
