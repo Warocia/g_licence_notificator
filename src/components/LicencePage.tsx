@@ -10,7 +10,7 @@ interface State {
     licences: Array<License>
 }
 
-export class LicencePage extends Component<Props, State> {
+export default class LicencePage extends Component<Props, State> {
 
   constructor(props : Props) {
     super(props);
@@ -23,9 +23,8 @@ export class LicencePage extends Component<Props, State> {
     return (
       <div>
        <LicenceList licences={this.state.licences} /> 
+       
       </div>
     );
   }
 }
-
-export default LicencePage;
