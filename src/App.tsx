@@ -12,12 +12,14 @@ import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
+    <div className="MainContainer">
       <Sidenav/>
-      <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/licencepage" element={<LicencePage />} />
-      </Routes>
+      <div className='MainContainerValue'>
+        <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/licencepage" element={<LicencePage />} />
+        </Routes>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,11 @@
 import React, {useState, useRef, useEffect, Component} from 'react';
 
+import styles from "./LicencePage"
+
 import { License } from "../Classes/License";
 import LicenceList from '../Functions/LicenceList';
 import { v4 } from 'uuid';
+import Button from 'react-bootstrap/Button';
 
 interface Props {  
 }
@@ -80,8 +83,10 @@ export default class LicencePage extends Component<Props, State> {
     return (
       <div>
         <LicenceList licences={this.state.licences} handleRemoveLicence={this.handleRemoveLicence} updateLicenseDate={this.updateLicenseDate} /> 
-        <input placeholder="Syötä tunnus" ref={this.licenceNumberRef} type="text" />
-        <button onClick={this.handleAddNewLicence}>Lisää</button> 
+        <div className="d-flex align-items-center">
+          <input placeholder="Syötä tunnus" ref={this.licenceNumberRef} type="text" />
+          <Button variant="dark" onClick={this.handleAddNewLicence}>Lisää</Button> 
+        </div>
       </div>
     );
   }

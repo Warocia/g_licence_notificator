@@ -1,10 +1,14 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #373b3e;
 }
-.App {
+.MainContainer {
   display: flex;
 }
-main {
-  padding: 10px;
+
+.MainContainerValue {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
