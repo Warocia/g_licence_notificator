@@ -1,3 +1,3 @@
 export class License{
-    constructor(public ValidDate: Date, public LicenseNumber: string) {}
+    constructor(public id: string, public ValidDate: Date | null, public LicenseNumber: string) {}
 }
