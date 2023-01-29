@@ -6,10 +6,19 @@ import { License } from "../Classes/License";
 import LicenceList from '../Functions/LicenceList';
 import { v4 } from 'uuid';
 import Button from 'react-bootstrap/Button';
+import UserService from '../Authentication/UserService';
+import { Console } from 'console';
 
 interface Props {  
 }
-  
+
+interface JSONData {
+  id: string;
+  licenseNumber: string;
+  isValidUtc: string;
+  notificationSent: boolean;
+}
+
 interface State {
     licences: Array<License>;
     setLicences: (newLicences: Array<License>) => void;
@@ -25,13 +34,31 @@ export default class LicencePage extends Component<Props, State> {
     this.handleRemoveLicence = this.handleRemoveLicence.bind(this);
     this.updateLicenseDate = this.updateLicenseDate.bind(this);
 
-    const initialLicences = [new License(v4(),new Date(), "23423"), new License(v4(), new Date(), "32423")];
     this.state = {
-       licences: initialLicences,
+       licences: [],
        setLicences: (newLicences: Array<License>) => {
            this.setState({licences: newLicences});
         }
     }
+  }
+
+  componentDidMount() {
+    UserService.getLicenses().then(
+      response => {
+
+        const restAPILicenses: License[] = response.map((data : JSONData) => {
+          return new License(data.id, new Date(data.isValidUtc), data.licenseNumber);
+        });
+
+        this.setState(prevState => {
+          return {licences: restAPILicenses};
+        });
+        
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   handleAddNewLicence(): void {
