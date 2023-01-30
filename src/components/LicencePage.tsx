@@ -8,16 +8,11 @@ import { v4 } from 'uuid';
 import Button from 'react-bootstrap/Button';
 import UserService from '../Authentication/UserService';
 import { Console } from 'console';
+import JSONDataLicense from '../Interfaces/JSONDataLicense';
 
 interface Props {  
 }
 
-interface JSONData {
-  id: string;
-  licenseNumber: string;
-  isValidUtc: string;
-  notificationSent: boolean;
-}
 
 interface State {
     licences: Array<License>;
@@ -46,7 +41,7 @@ export default class LicencePage extends Component<Props, State> {
     UserService.getLicenses().then(
       response => {
 
-        const restAPILicenses: License[] = response.map((data : JSONData) => {
+        const restAPILicenses: License[] = response.map((data : JSONDataLicense) => {
           return new License(data.id, new Date(data.isValidUtc), data.licenseNumber);
         });
 
@@ -61,6 +56,7 @@ export default class LicencePage extends Component<Props, State> {
     );
   }
 
+  
   handleAddNewLicence(): void {
 
     if (!this.licenceNumberRef.current) {
@@ -90,6 +86,8 @@ export default class LicencePage extends Component<Props, State> {
     this.setState(prevState => {
       return {licences: updatedLicences};
     });
+
+    UserService.postLicenses(updatedLicences);
   }
 
   updateLicenseDate(id : string, newDate : Date | null): void {
@@ -104,6 +102,8 @@ export default class LicencePage extends Component<Props, State> {
     this.setState(prevState => {
       return {licences: currentLicences};
     });
+
+    UserService.postLicenses(currentLicences);
   }
 
   render() {
