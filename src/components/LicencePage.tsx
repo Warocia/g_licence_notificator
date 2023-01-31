@@ -39,19 +39,11 @@ export default class LicencePage extends Component<Props, State> {
 
   componentDidMount() {
     UserService.getLicenses().then(
-      response => {
-
-        const restAPILicenses: License[] = response.map((data : JSONDataLicense) => {
-          return new License(data.id, new Date(data.isValidUtc), data.licenseNumber);
-        });
-
+      restAPILicenses => {
         this.setState(prevState => {
           return {licences: restAPILicenses};
         });
         
-      },
-      error => {
-        console.log(error);
       }
     );
   }

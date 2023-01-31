@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Navigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Button from 'react-bootstrap/Button';
 
 import AuthService from "../Authentication/AuthService";
 
@@ -121,12 +122,12 @@ export default class Login extends Component<Props, State> {
               </div>
 
               <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                <Button type="submit" variant="dark" disabled={loading}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
                   <span>Login</span>
-                </button>
+                </Button>
               </div>
 
               {message && (
