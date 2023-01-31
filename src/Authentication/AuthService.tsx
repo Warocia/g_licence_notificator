@@ -23,7 +23,8 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("USER_KEY");
+    localStorage.removeItem(USER_KEY);
+    window.location.reload();
   }
 
   getCurrentUser()  {
