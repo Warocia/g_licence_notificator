@@ -1,6 +1,8 @@
 import axios from "axios";
+import JSONUser from '../Interfaces/JSONUser';
 
 const API_URL = "https://localhost:7229/";
+const USER_KEY = 'auth-user';
 
 class AuthService {
   login(username: string, password: string) {
@@ -11,7 +13,9 @@ class AuthService {
       })
       .then(response => {
         if (response.data) {
-          localStorage.setItem("tokenAPI", response.data);
+
+          localStorage.removeItem(USER_KEY);
+          localStorage.setItem(USER_KEY, JSON.stringify(response.data));
         }
 
         return response.data;
@@ -19,12 +23,16 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("tokenAPI");
+    localStorage.removeItem("USER_KEY");
   }
 
-  getCurrentToken() {
-    const userStr = localStorage.getItem("tokenAPI");
-    if (userStr) return userStr;
+  getCurrentUser()  {
+    const storedData = localStorage.getItem(USER_KEY);
+
+    if (storedData){
+      const user: JSONUser = JSON.parse(storedData);
+      return user;
+    }
 
     return null;
   }

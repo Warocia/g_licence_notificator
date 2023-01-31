@@ -31,9 +31,9 @@ export default class Login extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const currenToken = AuthService.getCurrentToken();
+    const currenUser = AuthService.getCurrentUser();
 
-    if (currenToken) {
+    if (currenUser) {
       this.setState({ redirect: "/" });
     };
   }

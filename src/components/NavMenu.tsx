@@ -11,7 +11,7 @@ function NavMenu() {
         <Navbar.Brand as={Link} to="/home">Koti</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Nav className="me-auto">
-            <Nav.Link as={Link} to="/LicencePage">Lisenssit</Nav.Link>
+            <Nav.Link as={Link} to="/licencePage">Lisenssit</Nav.Link>
           </Nav>
       </Container>
     </Navbar>

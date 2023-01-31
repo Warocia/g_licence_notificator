@@ -5,8 +5,14 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { navData } from "../lib/navData";
 import { useState } from "react";
+import JSONUser from '../Interfaces/JSONUser';
 
-export default function Sidenav() {
+interface Props {
+    user: JSONUser | null;
+
+}
+
+export default function Sidenav(user : Props) {
     const [open, setopen] = useState(true)
     const toggleOpen = () => {
         setopen(!open)
@@ -18,7 +24,7 @@ export default function Sidenav() {
         <button className={styles.menuBtn} onClick={toggleOpen}>
             {open? <KeyboardDoubleArrowLeftIcon />: <KeyboardDoubleArrowRightIcon />}
         </button>
-        {navData.map(item =>{
+        {navData.filter(item => !item.adminRights || user.user?.IsAdmin).map(item =>{
             return <Nav.Link key={item.id} as={Link} className={styles.sideitem} to={item.link}>
             {item.icon}
             <span className={styles.linkText}>{item.text}</span>
